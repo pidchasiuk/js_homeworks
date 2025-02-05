@@ -7,7 +7,7 @@ function checkProbabilityTheory(count){
         let tempVar = Math.random() * (max - min) + min;
         randomArr.push(tempVar.toFixed(0));
     }
-    console.log(`Raandom array with length ${count} is: ${randomArr}`)
+    console.log(`Random array with length ${count} is: ${randomArr}`)
 
     let evenCounter = 0;
     let oddCounter = 0;
@@ -26,4 +26,4 @@ function checkProbabilityTheory(count){
     console.log(`Percent event to odd ${evenPercent} % ${oddPercent}`);
 }
 
-checkProbabilityTheory(33);
+checkProbabilityTheory(27);
