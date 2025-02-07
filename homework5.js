@@ -1,38 +1,34 @@
-class Services{
-    constructor(servicesObj){
-        this.servicesObj = servicesObj;
-        this.priceValues = Object.values(this.servicesObj);
+function price(servicesObject){
+    let priceSum = 0;
+    let servicesPrices = Object.values(servicesObject);
+    for(let i = 0; i < servicesPrices.length; i++){
+        priceSum += Number.parseFloat(servicesPrices[i]);
     }
+    return priceSum;
+}
 
-    price(){
-        let priceSum = 0;
-        for(let i = 0; i < this.priceValues.length; i++){
-            priceSum += Number.parseFloat(this.priceValues[i]);
+function minPrice(servicesObject){
+    let servicesPrices = Object.values(servicesObject);
+    let min = Number.parseFloat(servicesPrices[0]);
+    for(let i = 0; i < servicesPrices.length; i++){
+        let temp = Number.parseFloat(servicesPrices[i]);
+        if (min > temp){
+            min = temp;
         }
-        return priceSum;
     }
+    return min;
+}
 
-    minPrice(){
-        let min = Number.parseFloat(this.priceValues[0]);
-        for(let i = 0; i < this.priceValues.length; i++){
-            let temp = Number.parseFloat(this.priceValues[i]);
-            if (min > temp){
-                min = temp;
-            }
+function maxPrice(servicesObject){
+    let servicesPrices = Object.values(servicesObject);
+    let max = Number.parseFloat(servicesPrices[0]);
+    for(let i = 0; i < servicesPrices.length; i++){
+        let temp = Number.parseFloat(servicesPrices[i]);
+        if (max < temp){
+            max = temp;
         }
-        return min;
     }
-
-    maxPrice(){
-        let max = Number.parseFloat(this.priceValues[0]);
-        for(let i = 0; i < this.priceValues.length; i++){
-            let temp = Number.parseFloat(this.priceValues[i]);
-            if (max < temp){
-                max = temp;
-            }
-        }
-        return max;
-    }
+    return max;
 }
 
 var services = {
@@ -43,8 +39,6 @@ var services = {
 
 services["brake window"] = "200 uah";
 
-let newServices = new Services(services);
-
-console.log(`Total price: ${newServices.price()}`);
-console.log(`Min service price: ${newServices.minPrice()}`);
-console.log(`Max service price: ${newServices.maxPrice()}`)
+console.log(`Total price: ${price(services)}`);
+console.log(`Min service price: ${minPrice(services)}`);
+console.log(`Max service price: ${maxPrice(services)}`)
