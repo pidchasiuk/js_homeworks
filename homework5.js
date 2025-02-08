@@ -1,4 +1,4 @@
-const services = {
+let services = {
     servicesPrices: function(){
         let servicesPrices = [];
         for (let key in services){
