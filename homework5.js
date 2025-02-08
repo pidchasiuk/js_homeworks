@@ -1,44 +1,47 @@
-function price(servicesObject){
-    let priceSum = 0;
-    let servicesPrices = Object.values(servicesObject);
-    for(let i = 0; i < servicesPrices.length; i++){
-        priceSum += Number.parseFloat(servicesPrices[i]);
-    }
-    return priceSum;
-}
-
-function minPrice(servicesObject){
-    let servicesPrices = Object.values(servicesObject);
-    let min = Number.parseFloat(servicesPrices[0]);
-    for(let i = 0; i < servicesPrices.length; i++){
-        let temp = Number.parseFloat(servicesPrices[i]);
-        if (min > temp){
-            min = temp;
+const services = {
+    servicesPrices: function(){
+        let servicesPrices = [];
+        for (let key in services){
+            if (typeof services[key] === "string"){
+                servicesPrices.push(Number.parseFloat(services[key]))
+            }
         }
-    }
-    return min;
-}
-
-function maxPrice(servicesObject){
-    let servicesPrices = Object.values(servicesObject);
-    let max = Number.parseFloat(servicesPrices[0]);
-    for(let i = 0; i < servicesPrices.length; i++){
-        let temp = Number.parseFloat(servicesPrices[i]);
-        if (max < temp){
-            max = temp;
+        return servicesPrices;
+    },
+    price: function(){
+        let priceSum = 0;
+        for(let i = 0; i < this.servicesPrices().length; i++){
+            priceSum += this.servicesPrices()[i];
         }
-    }
-    return max;
-}
-
-var services = {
+        return priceSum;
+    },
+    minPrice: function(){
+        let min = this.servicesPrices()[0];
+        for(let i = 0; i < this.servicesPrices().length; i++){
+            let temp = this.servicesPrices()[i];
+            if (min > temp){
+                min = temp;
+            }
+        }
+        return min;
+    },
+    maxPrice: function(){
+        let max = this.servicesPrices()[0];
+        for(let i = 0; i < this.servicesPrices().length; i++){
+            let temp = this.servicesPrices()[i];
+            if (max < temp){
+                max = temp;
+            }
+        }
+        return max;
+    },
     "haircut": "60 uah",
     "shaving": "80 uah",
-    "hair wash": "100 uah"
-    };
+    "hair wash": "100 uah",
+};
 
 services["brake window"] = "200 uah";
 
-console.log(`Total price: ${price(services)}`);
-console.log(`Min service price: ${minPrice(services)}`);
-console.log(`Max service price: ${maxPrice(services)}`)
+console.log(`Total price: ${services.price()}`);
+console.log(`Min service price: ${services.minPrice()}`);
+console.log(`Max service price: ${services.maxPrice()}`);
